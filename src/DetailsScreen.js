@@ -1,13 +1,18 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import Background from './Background';
+import auth from '@react-native-firebase/auth';
 
 export default function DetailsScreen() {
+  const user = auth().currentUser;
+  if (user) {
+    console.log('User email: ', user.email);
+  }
   return (
     <Background>
       <View style={[styles.marginHorizontal, styles.marginVertical]}>
         <Text style={[styles.white, styles.fontSize]}>
-          Welcome to Home Page!
+          Welcome, {user.email}
         </Text>
       </View>
     </Background>
@@ -18,7 +23,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   fontSize: {
-    fontSize: 64,
+    fontSize: 20,
   },
   marginHorizontal: {
     marginHorizontal: 40,
